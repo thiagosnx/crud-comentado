@@ -5,6 +5,7 @@ import com.podstore.domain.product.Product;
 import com.podstore.domain.product.ProductRepository;
 
 import com.podstore.domain.product.RequestProduct;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,7 +74,7 @@ public class ProductController {
             product.setPrice_in_cents(data.price_in_cents());
             return ResponseEntity.ok(product);
         }else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException(); //exception q criamos
         }
         //agora passamos o SET das nossas 'colunas' para setar novos valores no nosso 'data' do requestProduct
     }
@@ -87,7 +88,7 @@ public class ProductController {
             //nao excluimos realmente, pois é bom deixar no db salvo
             return ResponseEntity.noContent().build();
         }else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException(); //exception q criamos
         }
 
 
