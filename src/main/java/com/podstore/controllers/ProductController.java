@@ -26,8 +26,9 @@ public class ProductController {
 
     @GetMapping // criamos um metodo pro nosso controller
     public ResponseEntity getAllProducts(){
-        var allProducts = repository.findAll(); // usamos o var do lombok para declarar a variável allProducts
-        //depois, usamos a instancia q criamos, repository, com um metodo do JpaRepository "findall" e pronto, obtemos
+        var allProducts = repository.findAllByActiveTrue(); // usamos o var do lombok para declarar a variável allProducts
+        //usamos o novo metodo criado para procurar os com o active=true pelo repositoy, metodo que usa o Jpa
+
 
         return ResponseEntity.ok(allProducts); // agora, retornamos a nossa variável, que terá todos os products.
     }
@@ -57,6 +58,7 @@ public class ProductController {
 
     @PutMapping
     @Transactional//colocamos o transactional para poder mudar os dados do DB
+    //é preciso para fazer +1 cmd ao msm tempo
     public ResponseEntity updateProduct(@RequestBody @Validated RequestProduct data){
 
         //usaremos o msm request para agilizar, mas poderiamos criar outro que aceita valores nulos e tal, vai q é um desses q eu preciso editar
@@ -73,11 +75,29 @@ public class ProductController {
         }else {
             return ResponseEntity.notFound().build();
         }
-
-
         //agora passamos o SET das nossas 'colunas' para setar novos valores no nosso 'data' do requestProduct
+    }
+    @DeleteMapping("/{id}")
+    @Transactional//mapeando pelo path do id
+    public ResponseEntity deleteProduct(@PathVariable String id){//o pathvariable usa o nosso /{id} na url p fazer as req
+        Optional<Product> optionalProduct = repository.findById(id);
+        if(optionalProduct.isPresent()){
+            Product product = optionalProduct.get();
+            product.setActive(false);//agora usamos o msm metodo do PUT, mas so trocamos o 'status' do produto para false
+            //nao excluimos realmente, pois é bom deixar no db salvo
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
 
 
+//        repository.deleteById(id);//usamos o nosso repository que é a variavel usada p manipular o db por jpa
+//        //damos o comando byId e passamos o id que acabamos de criar com o pathvariable
+//
+//        return ResponseEntity.noContent().build(); //dps so retornar um nocontent
+//
+//        //para testar, vamos no postman e colocamos o id na URI e fazemos e requisição de delete
+//        // /product/id
     }
 
 }

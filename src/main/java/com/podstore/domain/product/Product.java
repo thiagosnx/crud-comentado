@@ -26,10 +26,13 @@ public class Product {
 
     private Integer price_in_cents;
 
+    private Boolean active;
+
     public Product(RequestProduct requestProduct){
         // passamos o request no parametro para ele poder receber o (data) como parametro na isntnaica
         this.name = requestProduct.name();
         this.price_in_cents = requestProduct.price_in_cents();
+        this.active = true;
         // criamos os contrutores manualmente
     }
 
