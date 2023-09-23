@@ -1,10 +1,10 @@
-package com.podstore.controllers;
+package com.crudexample.controllers;
 
 
-import com.podstore.domain.product.Product;
-import com.podstore.domain.product.ProductRepository;
+import com.crudexample.domain.product.Product;
+import com.crudexample.domain.product.ProductRepository;
 
-import com.podstore.domain.product.RequestProduct;
+import com.crudexample.domain.product.RequestProduct;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

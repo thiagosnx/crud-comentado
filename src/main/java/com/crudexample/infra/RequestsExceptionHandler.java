@@ -1,4 +1,4 @@
-package com.podstore.infra;
+package com.crudexample.infra;
 
 
 import jakarta.persistence.EntityNotFoundException;

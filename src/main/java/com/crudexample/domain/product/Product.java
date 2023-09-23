@@ -1,4 +1,4 @@
-package com.podstore.domain.product;
+package com.crudexample.domain.product;
 
 
 import jakarta.persistence.*;

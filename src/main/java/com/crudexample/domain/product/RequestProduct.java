@@ -1,4 +1,4 @@
-package com.podstore.domain.product;
+package com.crudexample.domain.product;
 
 
 //Integer no price pq ele recebe um JSON, nao um number
