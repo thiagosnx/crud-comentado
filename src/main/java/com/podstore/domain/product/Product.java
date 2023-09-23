@@ -24,7 +24,16 @@ public class Product {
 
     private String name;
 
-    private Number price_in_cents;
+    private Integer price_in_cents;
+
+    public Product(RequestProduct requestProduct){
+        // passamos o request no parametro para ele poder receber o (data) como parametro na isntnaica
+        this.name = requestProduct.name();
+        this.price_in_cents = requestProduct.price_in_cents();
+        // criamos os contrutores manualmente
+    }
+
+
 
 
 
